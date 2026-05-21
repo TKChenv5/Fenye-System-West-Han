@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>汉代分野体系 - 交互式地图</title>
+    <meta name="description" content="以长安为观测中心，在线浏览西汉分野体系、星宿映射与州郡关系的交互式地图。">
+    <link href="https://unpkg.com/maplibre-gl@5.13.0/dist/maplibre-gl.css" rel="stylesheet">
+    <script src="https://unpkg.com/maplibre-gl@5.13.0/dist/maplibre-gl.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <script src="https://slowe.github.io/VirtualSky/stuquery.min.js"></script>
+    <script src="https://slowe.github.io/VirtualSky/virtualsky.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h1 class="title">西汉分野</h1>
+        </div>
+        <nav class="nav-buttons">
+            <button class="nav-btn active" data-chapter="chapter-2">
+                <span class="nav-number">01</span>
+                <span class="nav-text">观星坐标</span>
+            </button>
+            <button class="nav-btn" data-chapter="chapter-3">
+                <span class="nav-number">02</span>
+                <span class="nav-text">星图投影</span>
+            </button>
+            <button class="nav-btn" data-chapter="chapter-5">
+                <span class="nav-number">03</span>
+                <span class="nav-text">文献依据</span>
+            </button>
+            <button class="nav-btn" data-chapter="chapter-6">
+                <span class="nav-number">04</span>
+                <span class="nav-text">星宿图谱</span>
+            </button>
+            <button class="nav-btn" data-chapter="chapter-7">
+                <span class="nav-number">05</span>
+                <span class="nav-text">占候观念</span>
+            </button>
+            <button class="nav-btn" data-chapter="chapter-8">
+                <span class="nav-number">06</span>
+                <span class="nav-text">彩蛋</span>
+            </button>
+
+        </nav>
+        
+        <div class="content-area">
+            <div class="chapter active" id="chapter-2">
+                <h2>理解星宿的坐标系统</h2>
+                <p>汉代天文学家为星空建立了精确的坐标系统,将无形的天体转化为可量化的数据。本项目采用以长安(东经109°,北纬35°)为中心的极坐标系统。</p>
+                
+                <div class="coordinate-system">
+                    <h3>基本坐标参数</h3>
+                    <div class="param-box">
+                        <div class="param-item">
+                            <strong>参考点</strong><br/>
+                            长安 (中心)</div>
+                        <div class="param-item">
+                            <strong>经度</strong><br/>
+                            109.3° E</div>
+                        <div class="param-item">
+                            <strong>纬度</strong><br/>
+                            35.5° N</div>
+                    </div>
+                </div>
+                
+                <div class="coordinate-system">
+                    <h3>星宿坐标要素</h3>
+                    <div class="term-full">
+                        <div class="term-item">
+                            <strong>距度 (Angular Width)</strong><br/>
+                            <em>定义：</em> 各星宿沿赤道方向的角度跨度（单位：度）<br/>
+                            <em>作用：</em> 确定星宿的宽度范围<br/>
+                            <em>范围：</em> 1°~33°(※井宿最大33°)<br/>
+                            <em>计算：</em> 通过连续的星宿位置差计算
+                        </div>
+                        <div class="term-item">
+                            <strong>累积赤经 (Cumulative Right Ascension)</strong><br/>
+                            <em>定义：</em> 从春分点起始，沿赤道向东计测的角度总和<br/>
+                            <em>作用：</em> 确定星宿的经度位置<br/>
+                            <em>范围：</em> 0°~360°(完整周天)<br/>
+                            <em>关系：</em> 累积赤经 = Σ 距度（前序星宿）
+                        </div>
+                        <div class="term-item">
+                            <strong>方位角 (Azimuth)</strong><br/>
+                            <em>定义：</em> 从长安出发指向星宿的地理方向角<br/>
+                            <em>参考：</em> 正北为0°,顺时针递增<br/>
+                            <em>范围：</em> 0°~360°<br/>
+                            <em>计算：</em> 方位角 = 累积赤经 x (360° ÷ 二十八宿周期)
+                        </div>
+                    </div>
+                </div>
+                <div class="coordinate-system">
+                    <h3>四象体系分布</h3>
+                    <div class="quadrant-info">
+                        <div class="quadrant">
+                            <strong style="color: #00A0B0;">苍龙 (东方)</strong><br/>
+                            角、亢、氐、房、心、尾、箕<br/>
+                            方位角: 0° ~ 75°
+                        </div>
+                        <div class="quadrant">
+                            <strong style="color: #E84A5F;">朱雀 (南方)</strong><br/>
+                            井、鬼、柳、星、张、翼、轸<br/>
+                            方位角: 245° ~ 350°
+                        </div>
+                        <div class="quadrant">
+                            <strong style="color: #A1A1A1;">白虎 (西方)</strong><br/>
+                            奎、娄、胃、昴、毕、觜、参<br/>
+                            方位角: 170° ~ 250°
+                        </div>
+                        <div class="quadrant">
+                            <strong style="color: #2A363B;">玄武 (北方)</strong><br/>
+                            斗、牛、女、虚、危、室、壁<br/>
+                            方位角: 75° ~ 170°
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chapter" id="chapter-3">
+                <h2>从天球到地图的转换</h2>
+                <p>将二十八宿的天文数据转换为现代地图坐标，融合古代天学与地理学。整个转换过程分为三个核心步骤。</p>
+                
+                <div class="conversion-step">
+                    <h3>第一步：数据提取与标准化</h3>
+                    <div class="formula-box">
+                        <div class="data-source">
+                            <strong>输入数据来源：</strong><br/>
+                            星宿名称：二十八宿名录<br/>
+                            距度：各星宿的角宽度<br/>
+                            累积赤经：从春分点起的累积角度<br/>
+                            分野州郡：对应的地理区域
+                        </div>
+                        <div class="reference-point">
+                            <strong>参考坐标（长安）：</strong><br/>
+                            X₀ = 109° (东经)<br/>
+                            Y₀ = 35° (北纬)
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="conversion-step">
+                    <h3>第二步：方位角计算</h3>
+                    <div class="formula-box">
+                        <strong>核心公式：</strong><br/>
+                        <div class="formula">
+                            <code>方位角 (Azimuth) = 累积赤经 x 360 ÷ 365</code>
+                        </div>
+                        <br/>
+                        <strong>数学角度转换：</strong><br/>
+                        <div class="formula">
+                            <code>数学角度 = 90° - 方位角 (度)</code>
+                        </div>
+                        <br/>
+                        <strong>弧度转换：</strong><br/>
+                        <div class="formula">
+                            <code>数学角度_弧度 = 数学角度 x (π ÷ 180°)</code>
+                        </div>
+                        <br/>
+                        <strong>示例（角宿）：</strong><br/>
+                        方位角 = 0° (东方起点)<br/>
+                        数学角度 = 90° - 0° = 90°<br/>
+                        弧度 = 90° x π/180° = π/2 ≈ 1.5708
+                    </div>
+                </div>
+                
+                <div class="conversion-step">
+                    <h3>第三步：极坐标投影</h3>
+                    <div class="formula-box">
+                        <strong>极坐标投影公式（基于长安中心）：</strong><br/>
+                        <div class="formula">
+                            <code>X = X₀ + r x cos(θ)</code><br/>
+                            <code>Y = Y₀ + r x sin(θ)</code>
+                        </div>
+                        <br/>
+                        <strong>参数说明：</strong><br/>
+                        X₀, Y₀ = 长安中心坐标 (109.3°, 35.5°)<br/>
+                        r = 星宿到中心的距离（归一化长度）<br/>
+                        θ = 数学角度（弧度制）<br/>
+                        X, Y = 最终的地图坐标<br/>
+                        <br/>
+                        <strong>具体计算（以角宿为例）：</strong><br/>
+                        r = 1.0 (标准化距离)<br/>
+                        θ = π/2 (90°弧度)<br/>
+                        X = 109.3 + 1.0 x cos(π/2) = 109.3 + 0 = 109.3<br/>
+                        Y = 35.5 + 1.0 x sin(π/2) = 35.5 + 1 = 36.5
+                    </div>
+                </div>
+                
+                <div class="conversion-summary">
+                    <h3>完整转换流程图</h3>
+                    <div class="process-flow">
+                        <div class="flow-step">
+                            天文数据<br/>
+                            <span class="symbol">⬇</span>
+                        </div>
+                        <div class="flow-step">
+                            方位角计算<br/>
+                            <span class="symbol">⬇</span>
+                        </div>
+                        <div class="flow-step">
+                            数学角度转换<br/>
+                            <span class="symbol">⬇</span>
+                        </div>
+                        <div class="flow-step">
+                            极坐标投影<br/>
+                            <span class="symbol">⬇</span>
+                        </div>
+                        <div class="flow-step">
+                            地图坐标 (X, Y)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chapter" id="chapter-5">
+                <h2>历史文献与理论基础</h2>
+                <p>汉代分野体系源于悠久的古代天文学传统。</p>
+                
+                <div class="history-section">
+                    <h3>主要文献记载</h3>
+                    <div class="history-item">
+                        <strong>《史记·天官书》</strong><br/>
+                        司马迁对二十八宿体系的最详细记载。记录了每个星宿的位置、距度、对应州郡和可预示的天象。。
+                    </div>
+                    <div class="history-item">
+                        <strong>《汉书·天文志》</strong><br/>
+                        班固进一步整理和完善了分野理论，详细阐述了五行学说与星宿的对应关系。
+                    </div>
+                    <div class="history-item">
+                        <strong>《淮南子·天文训》</strong><br/>
+                        记载了古代对二十八宿的更早认识。
+                    </div>
+                    <div class="history-item">
+                        <strong>《周髀算经》</strong><br/>
+                        介绍了圆周天的度数制系统和坐标计算方法。
+                    </div>
+                </div>
+                
+                <div class="theory-section">
+                    <h3>核心理论体系</h3>
+                    <div class="theory-box">
+                        <strong>天人感应说</strong><br/>
+                        天上的异象能够预示人间的吉凶。每个星宿对应的州郡若有灾异，则通过天上星象可以预知。
+                    </div>
+                    <div class="theory-box">
+                        <strong>五行八卦对应</strong><br/>
+                        木火土金水五行与东南中西北五个方向相对应，二十八宿按四象分布于这五个方向。
+                    </div>
+                    <div class="theory-box">
+                        <strong>阴阳平衡</strong><br/>
+                        星宿的亮度、颜色变化被认为反映了阴阳之气的消长，影响对应地区的政治社会局势。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chapter" id="chapter-6">
+                <h2>二十八宿详细信息</h2>
+                <p>每个星宿都有其独特的天文学特征、历史含义和地理对应。</p>
+                
+                <div class="star-detailed">
+                    <h3>苍龙七宿 (东方)</h3>
+                    <div class="star-group">
+                        <div class="star-card">
+                            <strong style="color: #00A0B0;">角宿</strong><br/>
+                            距度: 12° | 分野: 兖州<br/>
+                            古名: 角、大角 | 识别: 室女座α星(角宿一)
+                        </div>
+                        <div class="star-card">
+                            <strong style="color: #00A0B0;">亢宿</strong><br/>
+                            距度: 9° | 分野: 兖州<br/>
+                            古名: 亢 | 识别: 室女座κ星
+                        </div>
+                        <div class="star-card">
+                            <strong style="color: #00A0B0;">氐宿</strong><br/>
+                            距度: 15° | 分野: 兖州<br/>
+                            古名: 氐 | 识别: 天秤座α星(氐宿一)
+                        </div>
+                        <div class="star-card">
+                            <strong style="color: #00A0B0;">房宿</strong><br/>
+                            距度: 5° | 分野: 豫州<br/>
+                            古名: 房 | 识别: 天蝎座π星
+                        </div>
+                        <div class="star-card">
+                            <strong style="color: #00A0B0;">心宿</strong><br/>
+                            距度: 5° | 分野: 豫州<br/>
+                            古名: 心 | 识别: 天蝎座α星(心宿二)
+                        </div>
+                        <div class="star-card">
+                            <strong style="color: #00A0B0;">尾宿</strong><br/>
+                            距度: 18° | 分野: 幽州<br/>
+                            古名: 尾 | 识别: 天蝎座δ星等7颗星
+                        </div>
+                        <div class="star-card">
+                            <strong style="color: #00A0B0;">箕宿</strong><br/>
+                            距度: 11° | 分野: 幽州<br/>
+                            古名: 箕 | 识别: 射手座8颗恒星
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="star-detailed">
+                    <h3>朱雀七宿 (南方)</h3>
+                    <div class="star-group">
+                        <div class="star-card" style="background: rgba(232, 74, 95, 0.1); border-left-color: #E84A5F;">
+                            <strong style="color: #E84A5F;">井宿</strong><br/>
+                            距度: 33° | 分野: 雍州<br/>
+                            古名: 井、南井 | 识别: 双子座μ星等9颗星
+                        </div>
+                        <div class="star-card" style="background: rgba(232, 74, 95, 0.1); border-left-color: #E84A5F;">
+                            <strong style="color: #E84A5F;">鬼宿</strong><br/>
+                            距度: 4° | 分野: 雍州<br/>
+                            古名: 鬼、舆鬼 | 识别: 巨蟹座θ星等4颗星
+                        </div>
+                        <div class="star-card" style="background: rgba(232, 74, 95, 0.1); border-left-color: #E84A5F;">
+                            <strong style="color: #E84A5F;">柳宿</strong><br/>
+                            距度: 15° | 分野: 三河<br/>
+                            古名: 柳 | 识别: 长蛇座θ星
+                        </div>
+                        <div class="star-card" style="background: rgba(232, 74, 95, 0.1); border-left-color: #E84A5F;">
+                            <strong style="color: #E84A5F;">星宿</strong><br/>
+                            距度: 7° | 分野: 三河<br/>
+                            古名: 星、天星 | 识别: 长蛇座α星
+                        </div>
+                        <div class="star-card" style="background: rgba(232, 74, 95, 0.1); border-left-color: #E84A5F;">
+                            <strong style="color: #E84A5F;">张宿</strong><br/>
+                            距度: 18° | 分野: 三河<br/>
+                            古名: 张 | 识别: 长蛇座5颗恒星
+                        </div>
+                        <div class="star-card" style="background: rgba(232, 74, 95, 0.1); border-left-color: #E84A5F;">
+                            <strong style="color: #E84A5F;">翼宿</strong><br/>
+                            距度: 19° | 分野: 荆州<br/>
+                            古名: 翼 | 识别: 长蛇座τ星
+                        </div>
+                        <div class="star-card" style="background: rgba(232, 74, 95, 0.1); border-left-color: #E84A5F;">
+                            <strong style="color: #E84A5F;">轸宿</strong><br/>
+                            距度: 17° | 分野: 荆州<br/>
+                            古名: 轸 | 识别: 乌鸦座α、β、γ、δ星
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="star-detailed">
+                    <h3>白虎七宿 (西方)</h3>
+                    <div class="star-group">
+                        <div class="star-card" style="background: rgba(161, 161, 161, 0.1); border-left-color: #A1A1A1;">
+                            <strong style="color: #A1A1A1;">奎宿</strong><br/>
+                            距度: 16° | 分野: 徐州<br/>
+                            古名: 奎 | 识别: 仙女座16颗恒星
+                        </div>
+                        <div class="star-card" style="background: rgba(161, 161, 161, 0.1); border-left-color: #A1A1A1;">
+                            <strong style="color: #A1A1A1;">娄宿</strong><br/>
+                            距度: 12° | 分野: 徐州<br/>
+                            古名: 娄 | 识别: 白羊座β、γ星
+                        </div>
+                        <div class="star-card" style="background: rgba(161, 161, 161, 0.1); border-left-color: #A1A1A1;">
+                            <strong style="color: #A1A1A1;">胃宿</strong><br/>
+                            距度: 14° | 分野: 徐州<br/>
+                            古名: 胃 | 识别: 白羊座35颗恒星
+                        </div>
+                        <div class="star-card" style="background: rgba(161, 161, 161, 0.1); border-left-color: #A1A1A1;">
+                            <strong style="color: #A1A1A1;">昴宿</strong><br/>
+                            距度: 14° | 分野: 冀州<br/>
+                            古名: 昴、七姐妹 | 识别: 金牛座昴星团
+                        </div>
+                        <div class="star-card" style="background: rgba(161, 161, 161, 0.1); border-left-color: #A1A1A1;">
+                            <strong style="color: #A1A1A1;">毕宿</strong><br/>
+                            距度: 16° | 分野: 冀州<br/>
+                            古名: 毕 | 识别: 金牛座毕星团
+                        </div>
+                        <div class="star-card" style="background: rgba(161, 161, 161, 0.1); border-left-color: #A1A1A1;">
+                            <strong style="color: #A1A1A1;">觜宿</strong><br/>
+                            距度: 5° | 分野: 益州<br/>
+                            古名: 觜 | 识别: 猎户座ζ、δ、ε星
+                        </div>
+                        <div class="star-card" style="background: rgba(161, 161, 161, 0.1); border-left-color: #A1A1A1;">
+                            <strong style="color: #A1A1A1;">参宿</strong><br/>
+                            距度: 8° | 分野: 益州<br/>
+                            古名: 参 | 识别: 猎户座参星（猎户座α、β、γ）
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="star-detailed">
+                    <h3>玄武七宿 (北方)</h3>
+                    <div class="star-group">
+                        <div class="star-card" style="background: rgba(42, 54, 59, 0.15); border-left-color: #2A363B;">
+                            <strong style="color: #7AAFFF;">斗宿</strong><br/>
+                            距度: 26° | 分野: 江/湖<br/>
+                            古名: 斗、北斗 | 识别: 人马座11颗恒星
+                        </div>
+                        <div class="star-card" style="background: rgba(42, 54, 59, 0.15); border-left-color: #2A363B;">
+                            <strong style="color: #7AAFFF;">牛宿</strong><br/>
+                            距度: 8° | 分野: 扬州<br/>
+                            古名: 牛 | 识别: 摩羯座β、ζ星
+                        </div>
+                        <div class="star-card" style="background: rgba(42, 54, 59, 0.15); border-left-color: #2A363B;">
+                            <strong style="color: #7AAFFF;">女宿</strong><br/>
+                            距度: 12° | 分野: 扬州<br/>
+                            古名: 女 | 识别: 摩羯座ε星
+                        </div>
+                        <div class="star-card" style="background: rgba(42, 54, 59, 0.15); border-left-color: #2A363B;">
+                            <strong style="color: #7AAFFF;">虚宿</strong><br/>
+                            距度: 10° | 分野: 青州<br/>
+                            古名: 虚 | 识别: 宝瓶座β星
+                        </div>
+                        <div class="star-card" style="background: rgba(42, 54, 59, 0.15); border-left-color: #2A363B;">
+                            <strong style="color: #7AAFFF;">危宿</strong><br/>
+                            距度: 17° | 分野: 青州<br/>
+                            古名: 危 | 识别: 宝瓶座α、β、γ星
+                        </div>
+                        <div class="star-card" style="background: rgba(42, 54, 59, 0.15); border-left-color: #2A363B;">
+                            <strong style="color: #7AAFFF;">室宿</strong><br/>
+                            距度: 16° | 分野: 并州<br/>
+                            古名: 室 | 识别: 飞马座α、β星
+                        </div>
+                        <div class="star-card" style="background: rgba(42, 54, 59, 0.15); border-left-color: #2A363B;">
+                            <strong style="color: #7AAFFF;">壁宿</strong><br/>
+                            距度: 9° | 分野: 并州<br/>
+                            古名: 壁 | 识别: 飞马座γ星、仙女座α星
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chapter" id="chapter-7">
+                <h2>天人感应与占星应用</h2>
+                <p>汉代统治者利用分野理论来诠释天象，进行政治决策和权力合法化。</p>
+                
+                <div class="application-section">
+                    <h3>占星应用实例</h3>
+                    <div class="application-box">
+                        <strong>星象异变的预示意义</strong><br/>
+                        <em>彗星出现于某宿：</em> 表示该宿对应州郡将有兵乱或灾祥<br/>
+                        <em>新星、客星：</em> 预示权力更替或重大政治变化<br/>
+                        <em>星色变化：</em> 深红色示凶兆，白色示吉祥
+                    </div>
+                    
+                    <div class="application-box">
+                        <strong>汉代历史记录</strong><br/>
+                        汉武帝时期，司马迁根据分野理论预测了多次政治事件。汉成帝时期，河平四年心宿异变被解释为后妃干政的警示。这类记载充分说明了分野学在汉代政治中的重要作用。
+                    </div>
+                    
+                    <div class="application-box">
+                        <strong>权力合法化工具</strong><br/>
+                        皇帝利用分野理论来解释自然灾害并调整政策。例如，若某州郡对应的星宿出现异常，皇帝会赦免该地税收或更换地方官员，体现"天意"。
+                    </div>
+                </div>
+                
+                <div class="principle-section">
+                    <h3>占星原则总结</h3>
+                    <div class="principle-table">
+                        <div class="principle-item">
+                            <strong>对应关系</strong>: 天上星宿 ↔ 人间州郡
+                        </div>
+                        <div class="principle-item">
+                            <strong>变化规律</strong>: 天象异常 → 地方异变
+                        </div>
+                        <div class="principle-item">
+                            <strong>时间周期</strong>: 短期预测(数月内) | 长期预兆(数年)
+                        </div>
+                        <div class="principle-item">
+                            <strong>可靠性</strong>: 后验性强 | 预测性相对弱
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chapter" id="chapter-8">
+                <h2>彩蛋</h2>
+                <p></p>
+                <div class="controls-info">
+                    <div>
+                        ⣿⣿⣿⠟⠛⠛⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⢋⣩⣉⢻<br/>
+                        ⣿⣿⣿⠀⣿⣶⣕⣈⠹⠿⠿⠿⠿⠟⠛⣛⢋⣰⠣⣿⣿⠀⣿<br/>
+                        ⣿⣿⣿⡀⣿⣿⣿⣧⢻⣿⣶⣷⣿⣿⣿⣿⣿⣿⠿⠶⡝⠀⣿<br/>
+                        ⣿⣿⣿⣷⠘⣿⣿⣿⢏⣿⣿⣋⣀⣈⣻⣿⣿⣷⣤⣤⣿⡐⢿<br/>
+                        ⣿⣿⣿⣿⣆⢩⣝⣫⣾⣿⣿⣿⣿⡟⠿⠿⠦⠀⠸⠿⣻⣿⡄⢻<br/>                             <!--不知道放点啥，放只猫得了-->
+                        ⣿⣿⣿⣿⣿⡄⢻⣿⣿⣿⣿⣿⣿⣿⣿⣶⣶⣾⣿⣿⣿⣿⠇⣼<br/>
+                        ⣿⣿⣿⣿⣿⣿⡄⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⣰<br/>
+                        ⣿⣿⣿⣿⣿⣿⠇⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢀⣿<br/>
+                        ⣿⣿⣿⣿⣿⠏⢰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢸⣿<br/>
+                        ⣿⣿⣿⣿⠟⣰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⣿<br/>
+                        ⣿⣿⣿⠋⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡄⣿<br/>
+                        ⣿⣿⠋⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⢸
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="map-stage">
+        <div id="map"></div>
+
+        <div class="observer-anchor" id="observer-anchor" aria-hidden="true">
+            <div class="observer-pulse"></div>
+            <div class="observer-core"></div>
+            <div class="observer-label">长安观测者</div>
+        </div>
+
+        <div class="sky-panel" id="sky-panel" aria-label="长安天穹">
+            <div class="sky-panel-body">
+                <div class="sky-horizon-hint" aria-hidden="true"></div>
+                <div id="virtualsky-container"></div>
+                <div id="sky-star-overlay" class="sky-star-overlay"></div>
+            </div>
+        </div>
+
+
+
+
+
+
+        <div class="sky-panel-controls">
+            <button id="language-toggle" class="sky-panel-action-btn language-toggle" type="button" aria-label="切换到英文版本">EN</button>
+            <button id="sky-panel-fab" class="sky-panel-fab" type="button" aria-controls="sky-panel" aria-expanded="true">收起天球</button>
+        </div>
+    </div>
+
+    <div class="coord-display">
+        <div class="coord-info">
+            <span id="coord-text">长安: 109.3° E, 35.5° N</span>
+        </div>
+        <div class="coord-label">鼠标坐标</div>
+    </div>
+
+    <div class="info-panel">
+        <div class="panel-header">
+            <span id="panel-title">选择一个星宿或州郡</span>
+            <button id="close-panel" class="close-btn">✕</button>
+        </div>
+        <div id="panel-content" class="panel-content">
+            <p class="placeholder">点击地图上的星宿或州郡查看详细信息</p>
+        </div>
+    </div>
+
+    <div class="analysis-legend" aria-label="分野分析图例">
+        <div class="analysis-legend-title">方向一致性分析</div>
+        <div class="analysis-legend-item">
+            <span class="analysis-legend-swatch is-aligned"></span>
+            <span>一致：州郡方位与星宿方位接近</span>
+        </div>
+        <div class="analysis-legend-item">
+            <span class="analysis-legend-swatch is-slight"></span>
+            <span>轻微偏离：存在一定角度差</span>
+        </div>
+        <div class="analysis-legend-item">
+            <span class="analysis-legend-swatch is-significant"></span>
+            <span>显著偏离：需要重点解释</span>
+        </div>
+        <div class="analysis-legend-note">底图中的半透明扇区用于标示四象方向分区。</div>
+    </div>
+
+    <div class="analysis-toolbar" aria-label="分析筛选与比较模式">
+        <div class="analysis-toolbar-group">
+            <span class="analysis-toolbar-label">偏离</span>
+            <div class="analysis-toolbar-buttons">
+                <button class="analysis-filter-btn is-active" data-group="alignment" data-value="all" type="button">全部</button>
+                <button class="analysis-filter-btn" data-group="alignment" data-value="deviation" type="button">偏离样本</button>
+                <button class="analysis-filter-btn" data-group="alignment" data-value="significant" type="button">显著偏离</button>
+            </div>
+        </div>
+        <div class="analysis-toolbar-group">
+            <span class="analysis-toolbar-label">类型</span>
+            <div class="analysis-toolbar-buttons">
+                <button class="analysis-filter-btn is-active" data-group="relation" data-value="all" type="button">全部</button>
+                <button class="analysis-filter-btn" data-group="relation" data-value="多宿共州" type="button">多宿共州</button>
+                <button class="analysis-filter-btn" data-group="relation" data-value="跨向对应" type="button">跨向对应</button>
+            </div>
+        </div>
+        <button id="analysis-method-toggle" class="analysis-method-toggle" type="button" aria-controls="analysis-method-panel" aria-expanded="false">方法与限度</button>
+    </div>
+
+    <div class="analysis-stats" id="analysis-stats" aria-label="分析统计面板">
+        <div class="analysis-stats-title">统计概览</div>
+        <div class="analysis-stats-body">正在准备分析统计…</div>
+    </div>
+
+    <div class="analysis-method-panel" id="analysis-method-panel" hidden>
+        <div class="analysis-method-header">
+            <span>方法与限度</span>
+            <button id="analysis-method-close" class="close-btn" type="button" aria-label="关闭方法与限度面板">✕</button>
+        </div>
+        <div class="analysis-method-content">
+            <div class="analysis-method-section">
+                <strong>方法路径</strong>
+                <p>以长安为中心，将星宿方位角与州郡中心点方位进行比较。这里强调的是方向一致性，而不是对古代观测距离的精确还原。</p>
+            </div>
+            <div class="analysis-method-section">
+                <strong>比较模式</strong>
+                <p>当前“汉书”与“差异比较”模式用于展示《史记》与《汉书》之间的分野差异。其中“汉书”层依据《汉书·天文志》重建，对照层则突出两者不同的对应关系。</p>
+            </div>
+            <div class="analysis-method-section">
+                <strong>研究限度</strong>
+                <p>州郡点位为近似复原，现代经纬度与汉代行政边界并非一一对应；扇区和连线主要用于展示方向规律与偏离样本。</p>
+            </div>
+            <div class="analysis-method-section">
+                <strong>附录入口提示</strong>
+                <p>若后续补充论文附录，可将星宿-州郡对照表、州郡说明与文献出处接到当前信息面板和比较层中，形成图文互证。</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="filter-controls">
+        <button class="filter-btn active" data-filter="all">全部</button>
+        <button class="filter-btn" data-filter="苍龙">苍龙</button>
+        <button class="filter-btn" data-filter="朱雀">朱雀</button>
+        <button class="filter-btn" data-filter="白虎">白虎</button>
+        <button class="filter-btn" data-filter="玄武">玄武</button>
+    </div>
+    
+    <div class="loading-indicator">
+        <div class="spinner"></div>
+    </div>
+    
+    <script src="js/translate.js?v=20260514a"></script>
+    <script src="js/main.js?v=20260512a"></script>
+</body>
+</html>

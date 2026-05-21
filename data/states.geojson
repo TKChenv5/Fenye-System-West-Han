@@ -1,0 +1,20 @@
+{
+"type": "FeatureCollection",
+"name": "han_states_points",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "州郡名": "兖州", "中心经度": 115.5, "中心纬度": 35.5, "分野星宿": "角宿、亢宿、氐宿" }, "geometry": { "type": "Point", "coordinates": [ 115.5, 35.5 ] } },
+{ "type": "Feature", "properties": { "州郡名": "豫州", "中心经度": 114.0, "中心纬度": 34.0, "分野星宿": "房宿、心宿" }, "geometry": { "type": "Point", "coordinates": [ 114.0, 34.0 ] } },
+{ "type": "Feature", "properties": { "州郡名": "幽州", "中心经度": 116.5, "中心纬度": 39.9, "分野星宿": "尾宿、箕宿" }, "geometry": { "type": "Point", "coordinates": [ 116.5, 39.9 ] } },
+{ "type": "Feature", "properties": { "州郡名": "江/湖", "中心经度": 120.0, "中心纬度": 30.0, "分野星宿": "斗宿" }, "geometry": { "type": "Point", "coordinates": [ 120.0, 30.0 ] } },
+{ "type": "Feature", "properties": { "州郡名": "扬州", "中心经度": 119.5, "中心纬度": 32.5, "分野星宿": "牛宿、女宿" }, "geometry": { "type": "Point", "coordinates": [ 119.5, 32.5 ] } },
+{ "type": "Feature", "properties": { "州郡名": "青州", "中心经度": 118.5, "中心纬度": 36.5, "分野星宿": "虚宿、危宿" }, "geometry": { "type": "Point", "coordinates": [ 118.5, 36.5 ] } },
+{ "type": "Feature", "properties": { "州郡名": "并州", "中心经度": 112.5, "中心纬度": 37.8, "分野星宿": "室宿、壁宿" }, "geometry": { "type": "Point", "coordinates": [ 112.5, 37.8 ] } },
+{ "type": "Feature", "properties": { "州郡名": "徐州", "中心经度": 117.0, "中心纬度": 34.2, "分野星宿": "奎宿、娄宿、胃宿" }, "geometry": { "type": "Point", "coordinates": [ 117.0, 34.2 ] } },
+{ "type": "Feature", "properties": { "州郡名": "冀州", "中心经度": 115.0, "中心纬度": 38.0, "分野星宿": "昴宿、毕宿" }, "geometry": { "type": "Point", "coordinates": [ 115.0, 38.0 ] } },
+{ "type": "Feature", "properties": { "州郡名": "益州", "中心经度": 104.0, "中心纬度": 30.6, "分野星宿": "觜宿、参宿" }, "geometry": { "type": "Point", "coordinates": [ 104.0, 30.6 ] } },
+{ "type": "Feature", "properties": { "州郡名": "雍州", "中心经度": 108.0, "中心纬度": 34.5, "分野星宿": "井宿、鬼宿" }, "geometry": { "type": "Point", "coordinates": [ 108.0, 34.5 ] } },
+{ "type": "Feature", "properties": { "州郡名": "三河", "中心经度": 111.0, "中心纬度": 34.8, "分野星宿": "柳宿、星宿、张宿" }, "geometry": { "type": "Point", "coordinates": [ 111.0, 34.8 ] } },
+{ "type": "Feature", "properties": { "州郡名": "荆州", "中心经度": 112.0, "中心纬度": 30.5, "分野星宿": "翼宿、轸宿" }, "geometry": { "type": "Point", "coordinates": [ 112.0, 30.5 ] } }
+]
+}
