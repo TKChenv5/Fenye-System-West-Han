@@ -238,7 +238,7 @@ window.HAN_FENYE_I18N = {
         '兖州': 'Yanzhou',
         '豫州': 'Yuzhou',
         '幽州': 'Youzhou',
-        '江/湖': 'Jiang-Hu Region',
+        '江/湖': 'River and lake region',
         '扬州': 'Yangzhou',
         '青州': 'Qingzhou',
         '并州': 'Bingzhou',
@@ -250,34 +250,34 @@ window.HAN_FENYE_I18N = {
         '荆州': 'Jingzhou'
     },
     stars: {
-        '角宿': 'Jiao Mansion',
-        '亢宿': 'Kang Mansion',
-        '氐宿': 'Di Mansion',
-        '房宿': 'Fang Mansion',
-        '心宿': 'Xin Mansion',
-        '尾宿': 'Wei Tail Mansion',
-        '箕宿': 'Ji Mansion',
-        '斗宿': 'Dou Mansion',
-        '牛宿': 'Niu Mansion',
-        '女宿': 'Nu Mansion',
-        '虚宿': 'Xu Mansion',
-        '危宿': 'Wei Rooftop Mansion',
-        '室宿': 'Shi Mansion',
-        '壁宿': 'Bi Wall Mansion',
-        '奎宿': 'Kui Mansion',
-        '娄宿': 'Lou Mansion',
-        '胃宿': 'Wei Stomach Mansion',
-        '昴宿': 'Mao Mansion',
-        '毕宿': 'Bi Net Mansion',
-        '觜宿': 'Zi Beak Mansion',
-        '参宿': 'Shen Mansion',
-        '井宿': 'Jing Well Mansion',
-        '鬼宿': 'Gui Ghost Mansion',
-        '柳宿': 'Liu Willow Mansion',
-        '星宿': 'Xing Mansion',
-        '张宿': 'Zhang Mansion',
-        '翼宿': 'Yi Wing Mansion',
-        '轸宿': 'Zhen Mansion'
+        '角宿': 'Jiao',
+        '亢宿': 'Kang',
+        '氐宿': 'Di',
+        '房宿': 'Fang',
+        '心宿': 'Xin',
+        '尾宿': 'Wei',
+        '箕宿': 'Ji',
+        '斗宿': 'Dou',
+        '牛宿': 'Niu',
+        '女宿': 'Nu',
+        '虚宿': 'Xu',
+        '危宿': 'Wei',
+        '室宿': 'Shi',
+        '壁宿': 'Bi',
+        '奎宿': 'Kui',
+        '娄宿': 'Lou',
+        '胃宿': 'Wei',
+        '昴宿': 'Mao',
+        '毕宿': 'Bi',
+        '觜宿': 'Zi',
+        '参宿': 'Shen',
+        '井宿': 'Jing',
+        '鬼宿': 'Gui',
+        '柳宿': 'Liu',
+        '星宿': 'Xing',
+        '张宿': 'Zhang',
+        '翼宿': 'Yi',
+        '轸宿': 'Zhen'
     },
     nav: {
         zh: {
@@ -287,8 +287,7 @@ window.HAN_FENYE_I18N = {
             'chapter-4': '帝国疆域',
             'chapter-5': '文献依据',
             'chapter-6': '星宿图谱',
-            'chapter-7': '占候观念',
-            'chapter-8': '彩蛋'
+            'chapter-7': '占候观念'
         },
         en: {
             'chapter-1': 'Twenty-Eight Mansions',
@@ -297,8 +296,7 @@ window.HAN_FENYE_I18N = {
             'chapter-4': 'Imperial Territory',
             'chapter-5': 'Sources',
             'chapter-6': 'Star Atlas',
-            'chapter-7': 'Omens',
-            'chapter-8': 'Bonus'
+            'chapter-7': 'Omens'
         }
     },
     chapters: {
@@ -390,7 +388,7 @@ window.HAN_FENYE_I18N = {
                     <div>Jiao, Kang, Di → Yanzhou</div>
                     <div>Fang, Xin → Yuzhou</div>
                     <div>Wei, Ji → Youzhou</div>
-                    <div>Dou → Jiang-Hu Region</div>
+                    <div>Dou → River and lake region</div>
                     <div>Niu, Nu → Yangzhou</div>
                     <div>Xu, Wei → Qingzhou</div>
                     <div>Shi, Bi → Bingzhou</div>
@@ -403,20 +401,11 @@ window.HAN_FENYE_I18N = {
                 </div>
             `,
             'chapter-5': `
-                <h2>Historical Texts and Theoretical Foundations</h2>
-                <p>The Han fenye system emerged from a long astronomical tradition and was sustained by classical scholarship.</p>
+                <h2>Sources</h2>
+                <p>The core Shiji citation used here for the fenye regional correspondences is as follows:</p>
                 <div class="history-section">
-                    <h3>Major textual sources</h3>
-                    <div class="history-item"><strong>Shiji · Treatise on the Celestial Offices</strong><br/>Sima Qian's most detailed account of the Twenty-Eight Mansions, including their positions, widths, corresponding regions, and omens.</div>
-                    <div class="history-item"><strong>Hanshu · Treatise on Astronomy</strong><br/>Ban Gu further systematized fenye theory and linked it to broader cosmological reasoning.</div>
-                    <div class="history-item"><strong>Huainanzi · Treatise on Astronomy</strong><br/>An important source for earlier understandings of the Twenty-Eight Mansions.</div>
-                    <div class="history-item"><strong>Zhoubi Suanjing</strong><br/>Provides the degree-based conception of the circular heavens and relevant computational methods.</div>
-                </div>
-                <div class="theory-section">
-                    <h3>Core theoretical ideas</h3>
-                    <div class="theory-box"><strong>Resonance between heaven and humanity</strong><br/>Celestial anomalies were interpreted as signs of fortune or disorder in the regions associated with each mansion.</div>
-                    <div class="theory-box"><strong>Five phases and directional order</strong><br/>Wood, fire, earth, metal, and water were mapped onto directionality, while the mansions were distributed across the Four Symbols.</div>
-                    <div class="theory-box"><strong>Balance of yin and yang</strong><br/>Changes in brightness and color were read as indicators of shifting cosmic forces affecting the political order below.</div>
+                    <h3>Shiji · Treatise on the Celestial Offices</h3>
+                    <div class="history-item"><strong>English translation</strong><br/>Jiao, Kang, Di correspond to Yanzhou. Fang, Xin correspond to Yuzhou. Wei, Ji correspond to Youzhou. Dou corresponds to the River and lake region. Niu, Nu correspond to Yangzhou. Xu, Wei correspond to Qingzhou. Shi, Bi correspond to Bingzhou. Kui, Lou, Wei correspond to Xuzhou. Mao, Bi correspond to Jizhou. Zi, Shen correspond to Yizhou. Jing, Gui correspond to Yongzhou. Liu, Xing, Zhang correspond to Sanhe. Yi, Zhen correspond to Jingzhou.</div>
                 </div>
             `,
             'chapter-6': `
@@ -425,49 +414,49 @@ window.HAN_FENYE_I18N = {
                 <div class="star-detailed">
                     <h3>Seven Azure Dragon Mansions (East)</h3>
                     <div class="star-group">
-                        <div class="star-card"><strong style="color: #00A0B0;">Jiao Mansion</strong><br/>Angular span: 12° | Region: Yanzhou<br/>Identification: Spica (Alpha Virginis)</div>
-                        <div class="star-card"><strong style="color: #00A0B0;">Kang Mansion</strong><br/>Angular span: 9° | Region: Yanzhou<br/>Identification: Kappa Virginis</div>
-                        <div class="star-card"><strong style="color: #00A0B0;">Di Mansion</strong><br/>Angular span: 15° | Region: Yanzhou<br/>Identification: Alpha Librae</div>
-                        <div class="star-card"><strong style="color: #00A0B0;">Fang Mansion</strong><br/>Angular span: 5° | Region: Yuzhou<br/>Identification: Pi Scorpii</div>
-                        <div class="star-card"><strong style="color: #00A0B0;">Xin Mansion</strong><br/>Angular span: 5° | Region: Yuzhou<br/>Identification: Antares</div>
-                        <div class="star-card"><strong style="color: #00A0B0;">Wei Tail Mansion</strong><br/>Angular span: 18° | Region: Youzhou<br/>Identification: the Delta Scorpii group</div>
-                        <div class="star-card"><strong style="color: #00A0B0;">Ji Mansion</strong><br/>Angular span: 11° | Region: Youzhou<br/>Identification: an eight-star group in Sagittarius</div>
+                        <div class="star-card"><strong style="color: #00A0B0;">Jiao</strong><br/>Angular span: 12° | Region: Yanzhou<br/>Identification: Spica (Alpha Virginis)</div>
+                        <div class="star-card"><strong style="color: #00A0B0;">Kang</strong><br/>Angular span: 9° | Region: Yanzhou<br/>Identification: Kappa Virginis</div>
+                        <div class="star-card"><strong style="color: #00A0B0;">Di</strong><br/>Angular span: 15° | Region: Yanzhou<br/>Identification: Alpha Librae</div>
+                        <div class="star-card"><strong style="color: #00A0B0;">Fang</strong><br/>Angular span: 5° | Region: Yuzhou<br/>Identification: Pi Scorpii</div>
+                        <div class="star-card"><strong style="color: #00A0B0;">Xin</strong><br/>Angular span: 5° | Region: Yuzhou<br/>Identification: Antares</div>
+                        <div class="star-card"><strong style="color: #00A0B0;">Wei</strong><br/>Angular span: 18° | Region: Youzhou<br/>Identification: the Delta Scorpii group</div>
+                        <div class="star-card"><strong style="color: #00A0B0;">Ji</strong><br/>Angular span: 11° | Region: Youzhou<br/>Identification: an eight-star group in Sagittarius</div>
                     </div>
                 </div>
                 <div class="star-detailed">
                     <h3>Seven Vermilion Bird Mansions (South)</h3>
                     <div class="star-group">
-                        <div class="star-card" style="background: rgba(232, 74, 95, 0.1); border-left-color: #E84A5F;"><strong style="color: #E84A5F;">Jing Well Mansion</strong><br/>Angular span: 33° | Region: Yongzhou<br/>Identification: Mu Geminorum and related stars</div>
-                        <div class="star-card" style="background: rgba(232, 74, 95, 0.1); border-left-color: #E84A5F;"><strong style="color: #E84A5F;">Gui Ghost Mansion</strong><br/>Angular span: 4° | Region: Yongzhou<br/>Identification: the Theta Cancri group</div>
-                        <div class="star-card" style="background: rgba(232, 74, 95, 0.1); border-left-color: #E84A5F;"><strong style="color: #E84A5F;">Liu Willow Mansion</strong><br/>Angular span: 15° | Region: Sanhe<br/>Identification: Theta Hydrae</div>
-                        <div class="star-card" style="background: rgba(232, 74, 95, 0.1); border-left-color: #E84A5F;"><strong style="color: #E84A5F;">Xing Mansion</strong><br/>Angular span: 7° | Region: Sanhe<br/>Identification: Alpha Hydrae</div>
-                        <div class="star-card" style="background: rgba(232, 74, 95, 0.1); border-left-color: #E84A5F;"><strong style="color: #E84A5F;">Zhang Mansion</strong><br/>Angular span: 18° | Region: Sanhe<br/>Identification: a five-star group in Hydra</div>
-                        <div class="star-card" style="background: rgba(232, 74, 95, 0.1); border-left-color: #E84A5F;"><strong style="color: #E84A5F;">Yi Wing Mansion</strong><br/>Angular span: 19° | Region: Jingzhou<br/>Identification: Tau Hydrae</div>
-                        <div class="star-card" style="background: rgba(232, 74, 95, 0.1); border-left-color: #E84A5F;"><strong style="color: #E84A5F;">Zhen Mansion</strong><br/>Angular span: 17° | Region: Jingzhou<br/>Identification: the major stars of Corvus</div>
+                        <div class="star-card" style="background: rgba(232, 74, 95, 0.1); border-left-color: #E84A5F;"><strong style="color: #E84A5F;">Jing</strong><br/>Angular span: 33° | Region: Yongzhou<br/>Identification: Mu Geminorum and related stars</div>
+                        <div class="star-card" style="background: rgba(232, 74, 95, 0.1); border-left-color: #E84A5F;"><strong style="color: #E84A5F;">Gui</strong><br/>Angular span: 4° | Region: Yongzhou<br/>Identification: the Theta Cancri group</div>
+                        <div class="star-card" style="background: rgba(232, 74, 95, 0.1); border-left-color: #E84A5F;"><strong style="color: #E84A5F;">Liu</strong><br/>Angular span: 15° | Region: Sanhe<br/>Identification: Theta Hydrae</div>
+                        <div class="star-card" style="background: rgba(232, 74, 95, 0.1); border-left-color: #E84A5F;"><strong style="color: #E84A5F;">Xing</strong><br/>Angular span: 7° | Region: Sanhe<br/>Identification: Alpha Hydrae</div>
+                        <div class="star-card" style="background: rgba(232, 74, 95, 0.1); border-left-color: #E84A5F;"><strong style="color: #E84A5F;">Zhang</strong><br/>Angular span: 18° | Region: Sanhe<br/>Identification: a five-star group in Hydra</div>
+                        <div class="star-card" style="background: rgba(232, 74, 95, 0.1); border-left-color: #E84A5F;"><strong style="color: #E84A5F;">Yi</strong><br/>Angular span: 19° | Region: Jingzhou<br/>Identification: Tau Hydrae</div>
+                        <div class="star-card" style="background: rgba(232, 74, 95, 0.1); border-left-color: #E84A5F;"><strong style="color: #E84A5F;">Zhen</strong><br/>Angular span: 17° | Region: Jingzhou<br/>Identification: the major stars of Corvus</div>
                     </div>
                 </div>
                 <div class="star-detailed">
                     <h3>Seven White Tiger Mansions (West)</h3>
                     <div class="star-group">
-                        <div class="star-card" style="background: rgba(161, 161, 161, 0.1); border-left-color: #A1A1A1;"><strong style="color: #A1A1A1;">Kui Mansion</strong><br/>Angular span: 16° | Region: Xuzhou<br/>Identification: stars in Andromeda</div>
-                        <div class="star-card" style="background: rgba(161, 161, 161, 0.1); border-left-color: #A1A1A1;"><strong style="color: #A1A1A1;">Lou Mansion</strong><br/>Angular span: 12° | Region: Xuzhou<br/>Identification: Beta and Gamma Arietis</div>
-                        <div class="star-card" style="background: rgba(161, 161, 161, 0.1); border-left-color: #A1A1A1;"><strong style="color: #A1A1A1;">Wei Stomach Mansion</strong><br/>Angular span: 14° | Region: Xuzhou<br/>Identification: the Aries field</div>
-                        <div class="star-card" style="background: rgba(161, 161, 161, 0.1); border-left-color: #A1A1A1;"><strong style="color: #A1A1A1;">Mao Mansion</strong><br/>Angular span: 14° | Region: Jizhou<br/>Identification: the Pleiades cluster</div>
-                        <div class="star-card" style="background: rgba(161, 161, 161, 0.1); border-left-color: #A1A1A1;"><strong style="color: #A1A1A1;">Bi Net Mansion</strong><br/>Angular span: 16° | Region: Jizhou<br/>Identification: the Hyades region</div>
-                        <div class="star-card" style="background: rgba(161, 161, 161, 0.1); border-left-color: #A1A1A1;"><strong style="color: #A1A1A1;">Zi Beak Mansion</strong><br/>Angular span: 5° | Region: Yizhou<br/>Identification: the bright stars near Orion's head</div>
-                        <div class="star-card" style="background: rgba(161, 161, 161, 0.1); border-left-color: #A1A1A1;"><strong style="color: #A1A1A1;">Shen Mansion</strong><br/>Angular span: 8° | Region: Yizhou<br/>Identification: Orion's main stars</div>
+                        <div class="star-card" style="background: rgba(161, 161, 161, 0.1); border-left-color: #A1A1A1;"><strong style="color: #A1A1A1;">Kui</strong><br/>Angular span: 16° | Region: Xuzhou<br/>Identification: stars in Andromeda</div>
+                        <div class="star-card" style="background: rgba(161, 161, 161, 0.1); border-left-color: #A1A1A1;"><strong style="color: #A1A1A1;">Lou</strong><br/>Angular span: 12° | Region: Xuzhou<br/>Identification: Beta and Gamma Arietis</div>
+                        <div class="star-card" style="background: rgba(161, 161, 161, 0.1); border-left-color: #A1A1A1;"><strong style="color: #A1A1A1;">Wei</strong><br/>Angular span: 14° | Region: Xuzhou<br/>Identification: the Aries field</div>
+                        <div class="star-card" style="background: rgba(161, 161, 161, 0.1); border-left-color: #A1A1A1;"><strong style="color: #A1A1A1;">Mao</strong><br/>Angular span: 14° | Region: Jizhou<br/>Identification: the Pleiades cluster</div>
+                        <div class="star-card" style="background: rgba(161, 161, 161, 0.1); border-left-color: #A1A1A1;"><strong style="color: #A1A1A1;">Bi</strong><br/>Angular span: 16° | Region: Jizhou<br/>Identification: the Hyades region</div>
+                        <div class="star-card" style="background: rgba(161, 161, 161, 0.1); border-left-color: #A1A1A1;"><strong style="color: #A1A1A1;">Zi</strong><br/>Angular span: 5° | Region: Yizhou<br/>Identification: the bright stars near Orion's head</div>
+                        <div class="star-card" style="background: rgba(161, 161, 161, 0.1); border-left-color: #A1A1A1;"><strong style="color: #A1A1A1;">Shen</strong><br/>Angular span: 8° | Region: Yizhou<br/>Identification: Orion's main stars</div>
                     </div>
                 </div>
                 <div class="star-detailed">
                     <h3>Seven Black Tortoise Mansions (North)</h3>
                     <div class="star-group">
-                        <div class="star-card" style="background: rgba(42, 54, 59, 0.15); border-left-color: #2A363B;"><strong style="color: #7AAFFF;">Dou Mansion</strong><br/>Angular span: 26° | Region: Jiang-Hu Region<br/>Identification: a large group in Sagittarius</div>
-                        <div class="star-card" style="background: rgba(42, 54, 59, 0.15); border-left-color: #2A363B;"><strong style="color: #7AAFFF;">Niu Mansion</strong><br/>Angular span: 8° | Region: Yangzhou<br/>Identification: Beta and Zeta Capricorni</div>
-                        <div class="star-card" style="background: rgba(42, 54, 59, 0.15); border-left-color: #2A363B;"><strong style="color: #7AAFFF;">Nu Mansion</strong><br/>Angular span: 12° | Region: Yangzhou<br/>Identification: Epsilon Capricorni</div>
-                        <div class="star-card" style="background: rgba(42, 54, 59, 0.15); border-left-color: #2A363B;"><strong style="color: #7AAFFF;">Xu Mansion</strong><br/>Angular span: 10° | Region: Qingzhou<br/>Identification: Beta Aquarii</div>
-                        <div class="star-card" style="background: rgba(42, 54, 59, 0.15); border-left-color: #2A363B;"><strong style="color: #7AAFFF;">Wei Rooftop Mansion</strong><br/>Angular span: 17° | Region: Qingzhou<br/>Identification: Alpha, Beta, and Gamma Aquarii</div>
-                        <div class="star-card" style="background: rgba(42, 54, 59, 0.15); border-left-color: #2A363B;"><strong style="color: #7AAFFF;">Shi Mansion</strong><br/>Angular span: 16° | Region: Bingzhou<br/>Identification: Alpha and Beta Pegasi</div>
-                        <div class="star-card" style="background: rgba(42, 54, 59, 0.15); border-left-color: #2A363B;"><strong style="color: #7AAFFF;">Bi Wall Mansion</strong><br/>Angular span: 9° | Region: Bingzhou<br/>Identification: Gamma Pegasi and Alpha Andromedae</div>
+                        <div class="star-card" style="background: rgba(42, 54, 59, 0.15); border-left-color: #2A363B;"><strong style="color: #7AAFFF;">Dou</strong><br/>Angular span: 26° | Region: River and lake region<br/>Identification: a large group in Sagittarius</div>
+                        <div class="star-card" style="background: rgba(42, 54, 59, 0.15); border-left-color: #2A363B;"><strong style="color: #7AAFFF;">Niu</strong><br/>Angular span: 8° | Region: Yangzhou<br/>Identification: Beta and Zeta Capricorni</div>
+                        <div class="star-card" style="background: rgba(42, 54, 59, 0.15); border-left-color: #2A363B;"><strong style="color: #7AAFFF;">Nu</strong><br/>Angular span: 12° | Region: Yangzhou<br/>Identification: Epsilon Capricorni</div>
+                        <div class="star-card" style="background: rgba(42, 54, 59, 0.15); border-left-color: #2A363B;"><strong style="color: #7AAFFF;">Xu</strong><br/>Angular span: 10° | Region: Qingzhou<br/>Identification: Beta Aquarii</div>
+                        <div class="star-card" style="background: rgba(42, 54, 59, 0.15); border-left-color: #2A363B;"><strong style="color: #7AAFFF;">Wei</strong><br/>Angular span: 17° | Region: Qingzhou<br/>Identification: Alpha, Beta, and Gamma Aquarii</div>
+                        <div class="star-card" style="background: rgba(42, 54, 59, 0.15); border-left-color: #2A363B;"><strong style="color: #7AAFFF;">Shi</strong><br/>Angular span: 16° | Region: Bingzhou<br/>Identification: Alpha and Beta Pegasi</div>
+                        <div class="star-card" style="background: rgba(42, 54, 59, 0.15); border-left-color: #2A363B;"><strong style="color: #7AAFFF;">Bi</strong><br/>Angular span: 9° | Region: Bingzhou<br/>Identification: Gamma Pegasi and Alpha Andromedae</div>
                     </div>
                 </div>
             `,
@@ -477,7 +466,7 @@ window.HAN_FENYE_I18N = {
                 <div class="application-section">
                     <h3>Examples of Astrological Use</h3>
                     <div class="application-box"><strong>The meaning of celestial anomalies</strong><br/><em>A comet in a given mansion:</em> turmoil or auspicious signs in the linked region<br/><em>Novae and guest stars:</em> political transition or major change<br/><em>Change in stellar color:</em> dark red implied danger, white implied auspiciousness</div>
-                    <div class="application-box"><strong>Historical records from the Han</strong><br/>During the reign of Emperor Wu, Sima Qian interpreted several political events through fenye reasoning. During the reign of Emperor Cheng, changes in the Xin Mansion were read as a warning about consort politics.</div>
+                    <div class="application-box"><strong>Historical records from the Han</strong><br/>During the reign of Emperor Wu, Sima Qian interpreted several political events through fenye reasoning. During the reign of Emperor Cheng, changes in Xin were read as a warning about consort politics.</div>
                     <div class="application-box"><strong>A tool of political legitimation</strong><br/>The emperor could interpret natural anomalies through fenye theory and then adjust policy. If the mansion associated with a certain region showed unusual signs, tax remissions or personnel changes could be justified as responses to Heaven's will.</div>
                 </div>
                 <div class="principle-section">
@@ -490,26 +479,6 @@ window.HAN_FENYE_I18N = {
                     </div>
                 </div>
             `,
-            'chapter-8': `
-                <h2>Hungry, Crying, Feed Me</h2>
-                <p></p>
-                <div class="controls-info">
-                    <div>
-                        ⣿⣿⣿⠟⠛⠛⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⢋⣩⣉⢻<br/>
-                        ⣿⣿⣿⠀⣿⣶⣕⣈⠹⠿⠿⠿⠿⠟⠛⣛⢋⣰⠣⣿⣿⠀⣿<br/>
-                        ⣿⣿⣿⡀⣿⣿⣿⣧⢻⣿⣶⣷⣿⣿⣿⣿⣿⣿⠿⠶⡝⠀⣿<br/>
-                        ⣿⣿⣿⣷⠘⣿⣿⣿⢏⣿⣿⣋⣀⣈⣻⣿⣿⣷⣤⣤⣿⡐⢿<br/>
-                        ⣿⣿⣿⣿⣆⢩⣝⣫⣾⣿⣿⣿⣿⣿⡟⠿⠿⠦⠀⠸⠿⣻⣿⡄⢻<br/>
-                        ⣿⣿⣿⣿⣿⡄⢻⣿⣿⣿⣿⣿⣿⣿⣿⣶⣶⣾⣿⣿⣿⣿⠇⣼<br/>
-                        ⣿⣿⣿⣿⣿⣿⡄⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⣰<br/>
-                        ⣿⣿⣿⣿⣿⣿⠇⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢀⣿<br/>
-                        ⣿⣿⣿⣿⣿⠏⢰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢸⣿<br/>
-                        ⣿⣿⣿⣿⠟⣰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⣿<br/>
-                        ⣿⣿⣿⠋⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡄⣿<br/>
-                        ⣿⣿⠋⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⢸
-                    </div>
-                </div>
-            `
         }
     }
 };

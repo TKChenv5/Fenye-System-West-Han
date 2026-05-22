@@ -1283,40 +1283,38 @@ function isSkyLabelVisible(xy, skyBody) {
     }
 
     const edgePadding = Math.max(6, Math.min(skyBody.clientWidth, skyBody.clientHeight) * 0.02);
-    const horizonLimit = skyBody.clientHeight * 0.84;
-    const domeRadius = Math.min(skyBody.clientWidth, skyBody.clientHeight) * 0.48;
+    const domeRadius = Math.min(skyBody.clientWidth, skyBody.clientHeight) * 0.5 - edgePadding;
     const domeCenterX = skyBody.clientWidth * 0.5;
     const domeCenterY = skyBody.clientHeight * 0.5;
     const domeDx = xy.x - domeCenterX;
     const domeDy = xy.y - domeCenterY;
     const insideDome = ((domeDx * domeDx) + (domeDy * domeDy)) <= (domeRadius * domeRadius);
 
-    return insideDome
-        && xy.x >= edgePadding
-        && xy.x <= skyBody.clientWidth - edgePadding
-        && xy.y >= edgePadding
-        && xy.y <= horizonLimit;
+    return insideDome;
 }
 
 function focusSkyOnStar(starName, options = {}) {
     const normalizedStarName = normalizeStarName(starName);
     if (!normalizedStarName || !virtualsky) return false;
 
-    const anchor = SKY_LABEL_ANCHORS[normalizedStarName];
-    const duration = Math.max(0, Number(options.duration) || 1400);
-
-    if (anchor && typeof virtualsky.panTo === 'function') {
-        try {
-            virtualsky.panTo(anchor.ra, anchor.dec, duration);
-            return true;
-        } catch (error) {
-            console.warn('VirtualSky panTo 失败，改用方位回退:', error);
-        }
-    }
-
     const feature = getStarFeatureByName(normalizedStarName);
     const targetAzimuth = Number(feature?.properties?.['方位角']);
     if (!Number.isFinite(targetAzimuth)) return false;
+
+    const anchor = SKY_LABEL_ANCHORS[normalizedStarName];
+    if (anchor) {
+        const targetRA = anchor.ra;
+        const longitude = virtualsky.longitude || CONFIG.changan[0];
+        
+        let targetGMST = (targetRA - longitude) % 360;
+        if (targetGMST < 0) targetGMST += 360;
+        
+        let targetD = (targetGMST - 280.46061837) / 360.985647366;
+        while (targetD < 0) targetD += (360 / 360.985647366);
+        
+        const J2000_MS = 946728000000;
+        virtualsky.clock = new Date(J2000_MS + targetD * 86400000);
+    }
 
     virtualsky.az_off = normalizeDegrees(targetAzimuth);
     observerHeadingLastSkyAz = normalizeDegrees(virtualsky.az_off);
@@ -1430,10 +1428,11 @@ function initVirtualSky() {
     try {
         virtualsky = S.virtualsky({
             id: 'virtualsky-container',
-            projection: 'stereo',
+            projection: 'polar',
             longitude: CONFIG.changan[0],
-            latitude: CONFIG.changan[1],
+            latitude: 90,
             az: 180,
+            fullsky: true,
             constellations: true,
             lines: true,
             constellationlabels: true,
@@ -1447,9 +1446,15 @@ function initVirtualSky() {
             magnitude: 5,
             gradient: true,
             transparent: true,
-            ground: true,
-            gridlines_az: true,
-            meridian: true,
+            ground: false,
+            gridlines_az: false,
+            gridlines_eq: true,
+            ecliptic: true,
+            showequator: true,
+            color_grid: 'rgba(255, 209, 102, 0.25)',
+            eclipticcolor: 'rgba(255, 215, 102, 0.6)',
+            equatorcolor: 'rgba(255, 107, 137, 0.6)',
+            meridian: false,
             cardinalpoints: true,
             background: 'rgba(0,0,0,0)',
             credit: false
@@ -1459,7 +1464,7 @@ function initVirtualSky() {
         ensureObserverHeadingBaseline();
 
         if (typeof virtualsky.selectProjection === 'function') {
-            virtualsky.selectProjection('stereo');
+            virtualsky.selectProjection('polar');
             if (typeof virtualsky.draw === 'function') {
                 virtualsky.draw();
             }
