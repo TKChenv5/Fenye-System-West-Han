@@ -1,32 +1,44 @@
-# 西汉分野体系在线站点
+# 西汉分野体系
 
-这个仓库已经整理为可直接发布到 GitHub Pages 的静态网站。
+一个基于静态前端实现的交互式可视化项目，用来展示西汉分野体系、二十八宿映射关系、州郡对应关系，以及天球与地图的联动浏览体验。
 
-## 站点入口
+## 在线访问
 
-- 根首页使用 `index.html`
-- 地图数据与样式、脚本全部通过相对路径加载，适合直接托管在仓库子路径下
+- GitHub Pages: https://tkchenv5.github.io/Fenye-System-West-Han/
 
-## 发布到 GitHub Pages
+## 项目内容
 
-1. 将仓库推送到 GitHub。
-2. 保持默认分支为 `main`，或按你的实际默认分支调整工作流触发分支。
-3. 在 GitHub 仓库设置中打开 Pages，并将 Build and deployment 设为 `GitHub Actions`。
-4. 推送后等待 `Deploy static site to Pages` 工作流完成。
+- 以长安为观测中心展示星宿与州郡的方向关系
+- 提供地图、连线、州郡标签与信息面板交互
+- 集成 VirtualSky 天球视图，支持地图与天穹联动
+- 提供中英双语界面切换
+- 使用 GitHub Actions 自动部署到 GitHub Pages
+
+## 技术结构
+
+- `index.html`: 站点主入口
+- `css/`: 页面样式
+- `js/main.js`: 地图交互、数据处理、联动逻辑
+- `js/translate.js`: 中英双语文案
+- `data/`: GeoJSON、底图和辅助图片资源
+- `.github/workflows/deploy-pages.yml`: GitHub Pages 自动部署工作流
 
 ## 本地预览
 
-这个项目需要通过静态文件服务器预览，因为页面会请求 GeoJSON 与图片资源。
-
-可任选一种方式：
+项目依赖静态资源请求，不能直接双击 HTML 文件预览，建议使用任意静态文件服务器启动项目目录，例如：
 
 - VS Code Live Server
-- 任意本地静态服务器工具
-- 自己常用的前端开发服务器
+- 其他本地静态服务工具
 
-## 目录说明
+## 部署方式
 
-- `index.html`: GitHub Pages 默认首页
-- `css/`: 页面样式
-- `js/`: 地图交互与中英双语文案
-- `data/`: GeoJSON 数据和底图资源
+仓库默认通过 GitHub Actions 自动部署：
+
+- 推送到 `main` 分支后会触发 Pages 工作流
+- Pages 构建方式为 `workflow`
+- 发布内容为仓库根目录中的静态站点文件
+
+## 当前仓库说明
+
+- 当前线上主入口是 `index.html`
+- 站点资源均通过相对路径加载，适合 GitHub Pages 子路径托管
