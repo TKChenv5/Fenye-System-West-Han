@@ -4,7 +4,7 @@
 
 ## 在线访问
 
-- GitHub Pages: https://tkchenv5.github.io/Fenye-System-West-Han/
+- GitHub Pages: https://tkchenv5.github.io/Fenye-System-Western-Han/
 
 ## 项目内容
 
