@@ -311,9 +311,7 @@ function applyStaticTranslations() {
     const methodSections = document.querySelectorAll('.analysis-method-section');
     const sectionKeys = [
         ['methodSection1Title', 'methodSection1Body'],
-        ['methodSection2Title', 'methodSection2Body'],
-        ['methodSection3Title', 'methodSection3Body'],
-        ['methodSection4Title', 'methodSection4Body']
+        ['methodSection2Title', 'methodSection2Body']
     ];
     methodSections.forEach((section, index) => {
         const strong = section.querySelector('strong');
@@ -1306,7 +1304,7 @@ function focusSkyOnStar(starName, options = {}) {
         const targetRA = anchor.ra;
         const longitude = virtualsky.longitude || CONFIG.changan[0];
         
-        let targetGMST = (targetRA - longitude) % 360;
+        let targetGMST = (targetRA - longitude + targetAzimuth - 180) % 360;
         if (targetGMST < 0) targetGMST += 360;
         
         let targetD = (targetGMST - 280.46061837) / 360.985647366;
@@ -1316,14 +1314,10 @@ function focusSkyOnStar(starName, options = {}) {
         virtualsky.clock = new Date(J2000_MS + targetD * 86400000);
     }
 
-    virtualsky.az_off = normalizeDegrees(targetAzimuth);
-    observerHeadingLastSkyAz = normalizeDegrees(virtualsky.az_off);
-
     if (typeof virtualsky.draw === 'function') {
         virtualsky.draw();
     }
 
-    syncMapHeadingToSky(true);
     scheduleSkyOverlayRender();
     return true;
 }
@@ -1444,7 +1438,7 @@ function initVirtualSky() {
             keyboard: false,
             mouse: true,
             magnitude: 5,
-            gradient: true,
+            gradient: false,
             transparent: true,
             ground: false,
             gridlines_az: false,
@@ -1455,13 +1449,35 @@ function initVirtualSky() {
             eclipticcolor: 'rgba(255, 215, 102, 0.6)',
             equatorcolor: 'rgba(255, 107, 137, 0.6)',
             meridian: false,
-            cardinalpoints: true,
+            cardinalpoints: false,
             background: 'rgba(0,0,0,0)',
             credit: false
         });
 
         window.virtualskyInstance = virtualsky;
         ensureObserverHeadingBaseline();
+
+        // 扩展极地投影视角：从天顶(90°)下延至赤纬-55°，以包含所有二十八宿(尤其是南方星宿如尾、箕等)
+        window.skyZoomLevel = window.skyZoomLevel || 1.0;
+        if (virtualsky.projections && virtualsky.projections['polar']) {
+            virtualsky.projections['polar'].atmos = false; // 关闭大气边缘星微光衰减
+            virtualsky.projections['polar'].azel2xy = function(az, el, w, h) {
+                const radius = Math.min(w, h) / 2;
+                const range = (145 * Math.PI / 180) / window.skyZoomLevel; // 应用缩放级别
+                const r = radius * ((Math.PI / 2) - el) / range;
+                return { x: (w/2 - r * Math.sin(az)), y: (h/2 - r * Math.cos(az)), el: el };
+            };
+            virtualsky.projections['polar'].xy2azel = function(x, y, w, h) {
+                const radius = Math.min(w, h) / 2;
+                const X = w/2 - x;
+                const Y = h/2 - y;
+                const r = Math.sqrt(X * X + Y * Y);
+                const range = (145 * Math.PI / 180) / window.skyZoomLevel;
+                const el = (Math.PI / 2) - r * range / radius;
+                const az = Math.atan2(X, Y);
+                return [az, el];
+            };
+        }
 
         if (typeof virtualsky.selectProjection === 'function') {
             virtualsky.selectProjection('polar');
@@ -1878,6 +1894,13 @@ function handleStarClick(e) {
 
     currentHighlight = { type: 'star', starName, state: relatedState };
     setSkyLock(starName);
+    
+    // Always fly map back to Chang'an, facing the star's azimuth
+    const targetAzimuth = properties['方位角'];
+    if (targetAzimuth !== undefined && map) {
+        map.flyTo({ center: CONFIG.changan, bearing: targetAzimuth, zoom: 6, duration: 1200, essential: true });
+    }
+    
     showStarPopup(coordinates, properties);
 }
 
@@ -1915,6 +1938,13 @@ function handleStateClick(e) {
 
     currentHighlight = { type: 'state', stateName: properties['州郡名'], star: properties['分野星宿'] };
     setSkyLock(relatedStar);
+    
+    // Always fly map back to Chang'an, facing the state's azimuth
+    const targetAzimuth = properties['中心方位角'];
+    if (targetAzimuth !== undefined && map) {
+        map.flyTo({ center: CONFIG.changan, bearing: targetAzimuth, zoom: 6, duration: 1200, essential: true });
+    }
+
     showStatePopup(coordinates, properties);
 }
 
@@ -1948,6 +1978,12 @@ function handleLineClick(e) {
 
     currentHighlight = { type: 'line', starName: properties['星宿'], stateName: properties['州郡'] };
     setSkyLock(properties['星宿']);
+    
+    const starFeature = starsFeatures.find(f => normalizeStarName(f.properties['星宿名']) === starName);
+    if (starFeature && starFeature.properties['方位角'] !== undefined && map) {
+        map.flyTo({ center: CONFIG.changan, bearing: starFeature.properties['方位角'], zoom: 6, duration: 1200, essential: true });
+    }
+
     showLinePopup(lineCoordinates, properties);
 }
 
@@ -1981,6 +2017,12 @@ function handleComparisonLineClick(e) {
 
     currentHighlight = { type: 'compare-line', starName: properties['星宿'], stateName: properties['州郡'] };
     setSkyLock(properties['星宿']);
+    
+    const starFeature = starsFeatures.find(f => normalizeStarName(f.properties['星宿名']) === starName);
+    if (starFeature && starFeature.properties['方位角'] !== undefined && map) {
+        map.flyTo({ center: CONFIG.changan, bearing: starFeature.properties['方位角'], zoom: 6, duration: 1200, essential: true });
+    }
+
     showLinePopup(lineCoordinates, properties);
 }
 
@@ -2140,7 +2182,6 @@ function renderSkyStarOverlay() {
         marker.addEventListener('click', (event) => {
             event.stopPropagation();
             handleStarClick({ features: [feature] });
-            map.flyTo({ center: feature.geometry.coordinates, zoom: 6, duration: 1200, essential: true });
         });
 
         overlay.appendChild(marker);
@@ -2435,6 +2476,63 @@ function setupUIEvents() {
         });
     }
 
+    const skyZoomIn = document.getElementById('sky-zoom-in');
+    const skyZoomOut = document.getElementById('sky-zoom-out');
+    const skyZoomResetBtn = document.getElementById('sky-zoom-reset');
+
+    const updateSkyZoom = (delta) => {
+        window.skyZoomLevel = Math.max(0.5, Math.min(3.0, window.skyZoomLevel * delta));
+        if (virtualsky && typeof virtualsky.draw === 'function') {
+            virtualsky.draw();
+        }
+        
+        const hint = document.querySelector('.sky-horizon-hint');
+        if (hint) {
+            hint.style.opacity = window.skyZoomLevel > 1.05 || window.skyZoomLevel < 0.95 ? '0' : '1';
+        }
+        
+        updateSkyStarOverlayPositions();
+    };
+
+    if (skyZoomIn) {
+        skyZoomIn.addEventListener('click', () => updateSkyZoom(1.2));
+    }
+    if (skyZoomOut) {
+        skyZoomOut.addEventListener('click', () => updateSkyZoom(1 / 1.2));
+    }
+    if (skyZoomResetBtn) {
+        skyZoomResetBtn.addEventListener('click', () => {
+            window.skyZoomLevel = 1.0;
+            if (virtualsky && typeof virtualsky.draw === 'function') {
+                virtualsky.draw();
+            }
+            
+            const hint = document.querySelector('.sky-horizon-hint');
+            if (hint) {
+                hint.style.opacity = '1';
+            }
+            
+            updateSkyStarOverlayPositions();
+        });
+    }
+
+    // Add wheel event to panel
+    const skyBodyRef = document.querySelector('.sky-panel-body');
+    if (skyBodyRef) {
+        skyBodyRef.addEventListener('wheel', (event) => {
+            if (event.target.closest('.sky-panel-body')) {
+                event.preventDefault();
+                event.stopPropagation();
+                // Check event deltaY
+                if (event.deltaY < 0) {
+                    updateSkyZoom(1.05); // zoom in
+                } else {
+                    updateSkyZoom(1 / 1.05); // zoom out
+                }
+            }
+        }, { passive: false });
+    }
+
     const skySizeSlider = document.getElementById('sky-panel-size-slider');
     if (skySizeSlider) {
         skySizeSlider.addEventListener('input', (event) => {
@@ -2608,14 +2706,12 @@ function searchItemClick(type, name) {
         const feature = starsData.features.find(f => f.properties['星宿名'] === name);
         if (feature) {
             handleStarClick({ features: [feature] });
-            map.flyTo({ center: feature.geometry.coordinates, zoom: 6 });
         }
     } else {
         const statesData = getSourceData('states');
         const feature = statesData.features.find(f => f.properties['州郡名'] === name);
         if (feature) {
             handleStateClick({ features: [feature] });
-            map.flyTo({ center: feature.geometry.coordinates, zoom: 6 });
         }
     }
     document.getElementById('search-results').classList.remove('active');

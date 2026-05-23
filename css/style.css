@@ -49,7 +49,7 @@ body {
     inset: 0;
     width: 100%;
     height: 100%;
-    border-radius: 18px;
+    border-radius: 50%;
     overflow: hidden;
 }
 
@@ -599,12 +599,13 @@ body {
     position: absolute;
     top: 24px;
     right: 24px;
-    width: min(var(--sky-panel-width), calc(100% - var(--sky-panel-safe-gap) * 2));
-    height: min(var(--sky-panel-height), calc(100% - var(--sky-panel-safe-gap) * 2));
-    max-width: calc(100% - var(--sky-panel-safe-gap) * 2);
-    max-height: calc(100% - var(--sky-panel-safe-gap) * 2);
+    width: min(var(--sky-panel-width), calc(100vw - var(--sky-panel-safe-gap) * 2));
+    height: min(var(--sky-panel-width), calc(100vw - var(--sky-panel-safe-gap) * 2));
+    aspect-ratio: 1 / 1;
+    max-width: calc(100vw - var(--sky-panel-safe-gap) * 2);
+    max-height: calc(100vh - var(--sky-panel-safe-gap) * 2);
     display: flex;
-    padding: 10px;
+    padding: 0;
     border-radius: 50%;
     background: rgba(5, 12, 26, 0.54);
     border: 1px solid rgba(124, 205, 221, 0.16);
@@ -681,22 +682,22 @@ body {
     position: relative;
     z-index: 1;
     flex: 1 1 auto;
-    min-height: 0;
-    min-height: 220px;
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
     overflow: hidden;
-    border: 1px solid rgba(117, 203, 224, 0.14);
+    border: none;
     background: radial-gradient(circle at 50% 14%, rgba(37, 90, 156, 0.3), rgba(8, 18, 34, 0.94) 60%, rgba(4, 10, 22, 0.98) 100%);
     touch-action: none;
-    transform: perspective(1600px) rotateX(14deg);
+    transform: none;
     transform-origin: 50% 100%;
     transition: transform 0.25s ease, border-radius 0.25s ease;
 }
 
 .sky-panel.is-compact {
-    gap: 6px;
-    padding: 10px 12px 10px;
-    border-radius: 22px;
+    gap: 0;
+    padding: 0;
+    border-radius: 50%;
 }
 
 .sky-panel.is-compact .sky-panel-header {
@@ -722,7 +723,7 @@ body {
 .sky-panel.is-compact .sky-panel-body {
     min-height: 168px;
     border-radius: 50%;
-    transform: perspective(1200px) rotateX(10deg);
+    transform: none;
 }
 
 .sky-panel.is-compact .sky-panel-status {
@@ -749,6 +750,61 @@ body {
     opacity: 0.8;
 }
 
+.sky-zoom-controls {
+    position: absolute;
+    left: -12px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;    
+    gap: 4px;
+    background: rgba(6, 16, 38, 0.85);
+    border: 1px solid var(--sky-panel-border);
+    backdrop-filter: blur(8px);
+    border-radius: 8px;
+    padding: 4px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.sky-panel.is-collapsed .sky-zoom-controls {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-50%) scale(0.8);
+}
+
+.sky-panel.is-compact .sky-zoom-controls {
+    left: 2px;
+    padding: 2px;
+}
+
+.sky-zoom-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.sky-zoom-btn:hover {
+    background: rgba(131, 235, 255, 0.15);
+    color: #fff;
+    border-color: rgba(131, 235, 255, 0.3);
+}
+
+.sky-zoom-btn:active {
+    background: rgba(131, 235, 255, 0.25);
+    transform: scale(0.95);
+}
+
 .sky-panel-body::after {
     content: '';
     position: absolute;
@@ -766,6 +822,7 @@ body {
     height: 1px;
     border-top: 1px solid rgba(255, 209, 102, 0.28);
     pointer-events: none;
+    transition: opacity 0.3s ease;
 }
 
 .sky-horizon-hint span {
@@ -1055,11 +1112,12 @@ body {
     left: 50%;
     right: auto;
     bottom: auto;
-    width: min(var(--sky-panel-width), calc(100% - var(--sky-panel-safe-gap) * 2));
-    height: min(var(--sky-panel-height), calc(100% - var(--sky-panel-safe-gap) * 2));
-    max-width: calc(100% - var(--sky-panel-safe-gap) * 2);
-    max-height: calc(100% - var(--sky-panel-safe-gap) * 2);
-    padding: 10px;
+    width: min(var(--sky-panel-width), calc(100vw - var(--sky-panel-safe-gap) * 2));
+    height: min(var(--sky-panel-width), calc(100vw - var(--sky-panel-safe-gap) * 2));
+    aspect-ratio: 1 / 1;
+    max-width: calc(100vw - var(--sky-panel-safe-gap) * 2);
+    max-height: calc(100vh - var(--sky-panel-safe-gap) * 2);
+    padding: 0;
     background: rgba(5, 11, 24, 0.2);
     border-color: rgba(95, 205, 224, 0.14);
     box-shadow: 0 28px 56px rgba(0, 0, 0, 0.34);
@@ -1398,14 +1456,15 @@ body {
         bottom: 14px;
         right: auto;
         left: 50%;
-        width: min(var(--sky-panel-width), calc(100% - 28px));
-        height: min(var(--sky-panel-height), calc(100% - 28px));
+        width: min(var(--sky-panel-width), calc(100vw - 28px));
+        height: min(var(--sky-panel-width), calc(100vw - 28px));
+        aspect-ratio: 1 / 1;
         border-radius: 50%;
         transform: translate3d(-50%, -100%, 0);
     }
 
     .sky-panel-body {
-        transform: perspective(1200px) rotateX(10deg);
+        transform: none;
     }
 
     .sky-panel.is-fused {
@@ -1413,8 +1472,9 @@ body {
         left: 50%;
         right: auto;
         bottom: auto;
-        width: min(var(--sky-panel-width), calc(100% - 28px));
-        height: min(var(--sky-panel-height), calc(100% - 28px));
+        width: min(var(--sky-panel-width), calc(100vw - 28px));
+        height: min(var(--sky-panel-width), calc(100vw - 28px));
+        aspect-ratio: 1 / 1;
     }
 
     .sky-panel.is-fused .sky-panel-header,
@@ -1462,24 +1522,26 @@ body {
     }
 
     .sky-panel {
-        padding: 10px;
+        padding: 0;
         border-radius: 50%;
         bottom: 10px;
         left: 50%;
         right: auto;
-        width: min(var(--sky-panel-width), calc(100% - 20px));
-        height: min(var(--sky-panel-height), calc(100% - 20px));
+        width: min(var(--sky-panel-width), calc(100vw - 20px));
+        height: min(var(--sky-panel-width), calc(100vw - 20px));
+        aspect-ratio: 1 / 1;
         transform: translate3d(-50%, -100%, 0);
     }
 
     .sky-panel-body {
-        transform: perspective(1000px) rotateX(7deg);
+        transform: none;
     }
 
     .sky-panel.is-fused {
-        width: min(var(--sky-panel-width), calc(100% - 20px));
-        height: min(var(--sky-panel-height), calc(100% - 20px));
-        padding: 10px;
+        width: min(var(--sky-panel-width), calc(100vw - 20px));
+        height: min(var(--sky-panel-width), calc(100vw - 20px));
+        aspect-ratio: 1 / 1;
+        padding: 0;
     }
 
     .sky-panel-header {

@@ -34,7 +34,7 @@ window.HAN_FENYE_I18N = {
             sourceShiji: '史记',
             sourceHanshu: '汉书',
             sourceCompare: '差异比较',
-            methodToggle: '方法与限度',
+            methodToggle: '图解说明',
             statsTitle: '统计概览',
             statsPreparing: '正在准备分析统计…',
             statsCurrentMode: '当前模式：{mode}<br>当前筛选下可见连线 {count} 条{extra}',
@@ -46,15 +46,11 @@ window.HAN_FENYE_I18N = {
             modeShiji: '史记单视图',
             modeHanshu: '汉书视图',
             modeCompare: '差异比较视图',
-            methodTitle: '方法与限度',
-            methodSection1Title: '方法路径',
-            methodSection1Body: '以长安为中心，将星宿方位角与州郡中心点方位进行比较。这里强调的是方向一致性，而不是对古代观测距离的精确还原。',
-            methodSection2Title: '比较模式',
-            methodSection2Body: '当前“汉书”与“差异比较”模式用于展示《史记》与《汉书》之间的分野差异。其中“汉书”层依据《汉书·天文志》重建，对照层则突出两者不同的对应关系。',
-            methodSection3Title: '研究限度',
-            methodSection3Body: '州郡点位为近似复原，现代经纬度与汉代行政边界并非一一对应；扇区和连线主要用于展示方向规律与偏离样本。',
-            methodSection4Title: '附录入口提示',
-            methodSection4Body: '若后续补充论文附录，可将星宿-州郡对照表、州郡说明与文献出处接到当前信息面板和比较层中，形成图文互证。',
+            methodTitle: '图解说明',
+            methodSection1Title: '偏离说明',
+            methodSection1Body: '分野体系中的方向一致性是基于星宿方位角与州郡方位的对应。部分州郡与星宿存在明显的方位角偏离，本系统在右侧图例中提供了筛选，以标识这种偏离。',
+            methodSection2Title: '对应类型',
+            methodSection2Body: '分野关系并非简单的一一对应。有些州分布于多个星宿中，有些星宿则对应多个州郡，同时《史记》和《汉书》记载也存在差异，可以通过“类型”与“文献”栏进行查看。',
             filterAll: '全部',
             switchToEnglish: '切换到英文版本',
             switchToChinese: '切换到中文版本',
@@ -147,7 +143,7 @@ window.HAN_FENYE_I18N = {
             sourceShiji: 'Shiji',
             sourceHanshu: 'Hanshu',
             sourceCompare: 'Difference View',
-            methodToggle: 'Method & Limits',
+            methodToggle: 'Map Notes',
             statsTitle: 'Statistical Overview',
             statsPreparing: 'Preparing analytical statistics…',
             statsCurrentMode: 'Current mode: {mode}<br>{count} visible links under the active filters{extra}',
@@ -159,18 +155,14 @@ window.HAN_FENYE_I18N = {
             modeShiji: 'Shiji single-view',
             modeHanshu: 'Hanshu view',
             modeCompare: 'Difference comparison view',
-            methodTitle: 'Method & Limits',
-            methodSection1Title: 'Method',
-            methodSection1Body: "Using Chang'an as the center, the project compares the azimuth of each stellar mansion with the azimuth of the corresponding regional centroid. The emphasis is directional consistency rather than an exact recovery of ancient observational distance.",
-            methodSection2Title: 'Comparison Mode',
-            methodSection2Body: 'The current Hanshu and Difference View modes present the divergences between the Shiji and the Hanshu traditions. The Hanshu layer is reconstructed from the Treatise on Astronomy, while the comparison mode isolates only the changed pairings.',
-            methodSection3Title: 'Research Limits',
-            methodSection3Body: 'Regional centroids are approximate reconstructions. Modern latitude and longitude do not correspond exactly to Han administrative borders, and the sectors and links are intended to reveal directional patterns and outliers.',
-            methodSection4Title: 'Appendix Entry',
-            methodSection4Body: 'If an appendix is added later, the concordance table, regional notes, and source citations can be linked into the current info panel and comparison layer to create direct map-text cross-reference.',
+            methodTitle: 'Map Notes',
+            methodSection1Title: 'Deviation Explanation',
+            methodSection1Body: 'The directional consistency in the Fenye system relies on aligning the azimuth of mansions and the azimuth of regional centroids. Some pairings show significant angular deviations, which can be explored using the filters on the right legend.',
+            methodSection2Title: 'Mapping Types',
+            methodSection2Body: 'The Fenye mapping is not always one-to-one. Some regions span multiple mansions, while some mansions correspond to multiple regions. Discrepancies between Shiji and Hanshu records can be toggled using the "Types" and "Source" configurations.',
             filterAll: 'All',
             switchToEnglish: 'Switch to English',
-            switchToChinese: '切换到中文',
+            switchToChinese: 'Switch to Chinese',
             preview: 'Preview',
             locked: 'Locked',
             skyStatusCollapsedMain: 'Sky dome collapsed',
@@ -238,7 +230,7 @@ window.HAN_FENYE_I18N = {
         '兖州': 'Yanzhou',
         '豫州': 'Yuzhou',
         '幽州': 'Youzhou',
-        '江/湖': 'River and lake region',
+        '江/湖': 'Jiang/Hu',
         '扬州': 'Yangzhou',
         '青州': 'Qingzhou',
         '并州': 'Bingzhou',
@@ -388,7 +380,7 @@ window.HAN_FENYE_I18N = {
                     <div>Jiao, Kang, Di → Yanzhou</div>
                     <div>Fang, Xin → Yuzhou</div>
                     <div>Wei, Ji → Youzhou</div>
-                    <div>Dou → River and lake region</div>
+                    <div>Dou → Jiang/Hu</div>
                     <div>Niu, Nu → Yangzhou</div>
                     <div>Xu, Wei → Qingzhou</div>
                     <div>Shi, Bi → Bingzhou</div>
@@ -405,7 +397,7 @@ window.HAN_FENYE_I18N = {
                 <p>The core Shiji citation used here for the fenye regional correspondences is as follows:</p>
                 <div class="history-section">
                     <h3>Shiji · Treatise on the Celestial Offices</h3>
-                    <div class="history-item"><strong>English translation</strong><br/>Jiao, Kang, Di correspond to Yanzhou. Fang, Xin correspond to Yuzhou. Wei, Ji correspond to Youzhou. Dou corresponds to the River and lake region. Niu, Nu correspond to Yangzhou. Xu, Wei correspond to Qingzhou. Shi, Bi correspond to Bingzhou. Kui, Lou, Wei correspond to Xuzhou. Mao, Bi correspond to Jizhou. Zi, Shen correspond to Yizhou. Jing, Gui correspond to Yongzhou. Liu, Xing, Zhang correspond to Sanhe. Yi, Zhen correspond to Jingzhou.</div>
+                    <div class="history-item"><strong>English translation</strong><br/>Jiao, Kang, Di correspond to Yanzhou. Fang, Xin correspond to Yuzhou. Wei, Ji correspond to Youzhou. Dou corresponds to Jiang/Hu. Niu, Nu correspond to Yangzhou. Xu, Wei correspond to Qingzhou. Shi, Bi correspond to Bingzhou. Kui, Lou, Wei correspond to Xuzhou. Mao, Bi correspond to Jizhou. Zi, Shen correspond to Yizhou. Jing, Gui correspond to Yongzhou. Liu, Xing, Zhang correspond to Sanhe. Yi, Zhen correspond to Jingzhou.</div>
                 </div>
             `,
             'chapter-6': `
@@ -450,7 +442,7 @@ window.HAN_FENYE_I18N = {
                 <div class="star-detailed">
                     <h3>Seven Black Tortoise Mansions (North)</h3>
                     <div class="star-group">
-                        <div class="star-card" style="background: rgba(42, 54, 59, 0.15); border-left-color: #2A363B;"><strong style="color: #7AAFFF;">Dou</strong><br/>Angular span: 26° | Region: River and lake region<br/>Identification: a large group in Sagittarius</div>
+                        <div class="star-card" style="background: rgba(42, 54, 59, 0.15); border-left-color: #2A363B;"><strong style="color: #7AAFFF;">Dou</strong><br/>Angular span: 26° | Region: Jiang/Hu<br/>Identification: a large group in Sagittarius</div>
                         <div class="star-card" style="background: rgba(42, 54, 59, 0.15); border-left-color: #2A363B;"><strong style="color: #7AAFFF;">Niu</strong><br/>Angular span: 8° | Region: Yangzhou<br/>Identification: Beta and Zeta Capricorni</div>
                         <div class="star-card" style="background: rgba(42, 54, 59, 0.15); border-left-color: #2A363B;"><strong style="color: #7AAFFF;">Nu</strong><br/>Angular span: 12° | Region: Yangzhou<br/>Identification: Epsilon Capricorni</div>
                         <div class="star-card" style="background: rgba(42, 54, 59, 0.15); border-left-color: #2A363B;"><strong style="color: #7AAFFF;">Xu</strong><br/>Angular span: 10° | Region: Qingzhou<br/>Identification: Beta Aquarii</div>
